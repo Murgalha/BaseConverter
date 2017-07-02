@@ -86,7 +86,32 @@ namespace BaseConverter {
 
             return result;
         }
-        /* dec2oct */
+        
+        public static string Dec2Oct(string s) {
+            
+            string result = "";
+            ulong n = Convert.ToUInt64(s);
+            List<String> remainders = new List<String>();
+            ulong q = 0, r;
+
+            while(n >= 8) {
+                q = n / 8;
+                r = n % 8;
+                remainders.Add(r.ToString());
+                n = q;
+            }
+
+            result = q.ToString();
+
+            remainders.Reverse();
+            List<String>.Enumerator it = remainders.GetEnumerator();
+
+            do {
+                result += it.Current;
+            } while(it.MoveNext());
+
+            return result;
+        }
 
         public static string Bin2Dec(string s) {
 

@@ -52,6 +52,7 @@ namespace BaseConverter {
                 ulong n;
                 WarningText.Text = "";
 
+                /* verify the decimal input format and size */
                 try {
                     n = Convert.ToUInt64(TextBox1.Text.ToString());
                 }
@@ -64,6 +65,7 @@ namespace BaseConverter {
                     return;
                 }
 
+                /* decimal to binary conversion */
                 if(ComboBox2.SelectedItem.ToString() == "Binary") {
                     string result = "";
 
@@ -72,6 +74,7 @@ namespace BaseConverter {
                     TextBox2.Text = result;
                 }
 
+                /* decimal to hex conversion */
                 else if(ComboBox2.SelectedItem.ToString() == "Hexadecimal") {
                     string result;
 
@@ -79,8 +82,12 @@ namespace BaseConverter {
                     TextBox2.Text = result;
                 }
 
+                /* decimal to octal conversion */
                 else if(ComboBox2.SelectedItem.ToString() == "Octal") {
-                    // Dec2Oct
+                    string result;
+
+                    result = BaseConverter.Dec2Oct(TextBox1.Text.ToString());
+                    TextBox2.Text = result;
                 }
 
                 else {
