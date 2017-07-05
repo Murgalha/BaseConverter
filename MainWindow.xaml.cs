@@ -90,6 +90,7 @@ namespace BaseConverter {
                     TextBox2.Text = result;
                 }
 
+                /* no conversion */
                 else {
                     TextBox2.Text = TextBox1.Text;
                 }
@@ -97,11 +98,13 @@ namespace BaseConverter {
 
             else if(ComboBox1.SelectedItem.ToString() == "Binary") {
 
+                /* check if input is binary-format */
                 if (!BaseConverter.IsBinary(TextBox1.Text.ToString())) {
                     WarningText.Text = "Error! Invalid number.";
                     return;
                 }
 
+                /* binary to decimal conversion */
                 if(ComboBox2.SelectedItem.ToString() == "Decimal") {
                     string result = "";
 
@@ -111,7 +114,11 @@ namespace BaseConverter {
                 }
 
                 else if(ComboBox2.SelectedItem.ToString() == "Hexadecimal") {
+                    string result;
 
+                    result = BaseConverter.Bin2Hex(TextBox1.Text.ToString());
+
+                    TextBox2.Text = result;
                 }
 
                 else if(ComboBox2.SelectedItem.ToString() == "Octal") {

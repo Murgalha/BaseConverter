@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BaseConverter {
 
-    static class BaseConverter {
+    public static class BaseConverter {
 
         public static bool IsBinary(string s) {
 
@@ -68,7 +68,7 @@ namespace BaseConverter {
             List<ulong>.Enumerator it = remainders.GetEnumerator();
 
             do {
-                if(it.Current == 10)
+               if(it.Current == 10)
                     result += 'A';
                 else if(it.Current == 11)
                     result += 'B';
@@ -116,16 +116,14 @@ namespace BaseConverter {
         public static string Bin2Dec(string s) {
 
             string result;
-            int i, k;
-            int p = 0;
+            int i;
+            int k = 0;
             ulong sum = 0;
 
             for(i = s.Length-1; i >= 0; i--) {
-
-                if(s[i] == '1') {
-                    sum += (ulong)(Math.Pow(2, (double)p));
-                }
-                p++;
+                if(s[i] == '1')
+                    sum += (ulong)(Math.Pow(2,k));
+                k++;
             }
 
             result = sum.ToString();
@@ -133,7 +131,36 @@ namespace BaseConverter {
             return result;
         }
 
-        /* bin2hex */
+        public static string Bin2Hex(string s) {
+
+            string result = "";
+            ulong sum;
+            double k = 0;
+
+            for (int i = (s.Length/4)-1; i >= 0; i--) {
+                sum = 0;
+                for (int j = 3; j >= 0; j--) {
+                    if(s[(4 * i) + j] == '1')
+                        sum += (ulong)Math.Pow(2, k);
+                    k++;
+                }
+                if (sum == 10)
+                    result += 'A';
+                else if (sum == 11)
+                    result += 'B';
+                else if (sum == 12)
+                    result += 'C';
+                else if (sum == 13)
+                    result += 'D';
+                else if (sum == 14)
+                    result += 'E';
+                else if (sum == 15)
+                    result += 'F';
+                else
+                    result += sum.ToString();
+            }
+            return result;
+        }
         /* bin2oct */
     }
 }
