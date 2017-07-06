@@ -122,7 +122,11 @@ namespace BaseConverter {
                 }
 
                 else if(ComboBox2.SelectedItem.ToString() == "Octal") {
+                    string result;
 
+                    result = BaseConverter.Bin2Oct(TextBox1.Text.ToString());
+
+                    TextBox2.Text = result;
                 }
 
                 else {

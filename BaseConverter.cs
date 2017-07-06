@@ -165,5 +165,27 @@ namespace BaseConverter {
             Array.Reverse(aux);
             return new string(aux);
         }
+
+        public static string Bin2Oct(string s) {
+
+            string result = "";
+            ulong sum;
+            double k;
+
+            for(int i = s.Length - 1; i >= 0; i -= 3) {
+                sum = 0;
+                k = 0;
+                for(int j = 0; j < 3; j++) {
+                    if(i - j >= 0 && s[i - j] == '1')
+                        sum += (ulong)Math.Pow(2, k);
+                    k++;
+                }
+                result += sum.ToString();
+            }
+
+            char[] aux = result.ToCharArray();
+            Array.Reverse(aux);
+            return new string(aux);
+        }
     }
 }
