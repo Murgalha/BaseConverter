@@ -6,10 +6,7 @@ namespace BaseConverter {
     public static class BaseConverter {
 
         public static bool IsBinary(string s) {
-
-            int i;
-
-            for (i = 0; i < s.Length; i++) {
+            for (int i = 0; i < s.Length; i++) {
                 if (s[i] != '1' && s[i] != '0') {
                     return false;
                 }
@@ -20,20 +17,29 @@ namespace BaseConverter {
             return true;
         }
 
+        public static bool IsHex(string s) {
+            for (int i = 0; i < s.Length; i++) {
+                if((s[i] >= '0' && s[i] <= '9') || (s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z'))
+                    continue;
+                else
+                    return false;
+            }
+            return true;
+        }
+
         public static string Dec2Bin(string s) {
 
             string result = "";
             ulong n = Convert.ToUInt64(s);
             List<String> remainders = new List<String>();
-            ulong q = 0, r;
+            ulong q = n%2, r;
 
-            while(n >= 2) {
+            while (n >= 2) {
                 q = n / 2;
                 r = n % 2;
                 remainders.Add(r.ToString());
                 n = q;
             }
-
             result = q.ToString();
 
             remainders.Reverse();
@@ -47,52 +53,50 @@ namespace BaseConverter {
         }
 
         public static string Dec2Hex(string s) {
-
             string result = "";
             s = s.ToUpper();
             ulong n = Convert.ToUInt64(s);
             ulong q = n%16, r;
-            List<ulong> remainders = new List<ulong>();
+            List<String> remainders = new List<String>();
 
             while (n >= 16) {
                 q = n / 16;
                 r = n % 16;
-                remainders.Add(r);
+                remainders.Add(r.ToString());
                 n = q;
             }
 
-            remainders.Add(q);
+            remainders.Add(q.ToString());
 
             remainders.Reverse();
 
-            List<ulong>.Enumerator it = remainders.GetEnumerator();
+            List<String>.Enumerator it = remainders.GetEnumerator();
 
             do {
-               if(it.Current == 10)
+               if(it.Current == "10")
                     result += 'A';
-                else if(it.Current == 11)
+                else if(it.Current == "11")
                     result += 'B';
-                else if(it.Current == 12)
+                else if(it.Current == "12")
                     result += 'C';
-                else if(it.Current == 13)
+                else if(it.Current == "13")
                     result += 'D';
-                else if(it.Current == 14)
+                else if(it.Current == "14")
                     result += 'E';
-                else if(it.Current == 15)
+                else if(it.Current == "15")
                     result += 'F';
                 else
-                    result += it.Current.ToString();
+                    result += it.Current;
             } while(it.MoveNext());
 
             return result;
         }
         
         public static string Dec2Oct(string s) {
-            
             string result = "";
             ulong n = Convert.ToUInt64(s);
             List<String> remainders = new List<String>();
-            ulong q = 0, r;
+            ulong q = n%8, r;
 
             while(n >= 8) {
                 q = n / 8;
@@ -114,7 +118,6 @@ namespace BaseConverter {
         }
 
         public static string Bin2Dec(string s) {
-
             string result;
             int i;
             int k = 0;
@@ -132,7 +135,6 @@ namespace BaseConverter {
         }
 
         public static string Bin2Hex(string s) {
-
             string result = "";
             ulong sum;
             double k;
@@ -167,7 +169,6 @@ namespace BaseConverter {
         }
 
         public static string Bin2Oct(string s) {
-
             string result = "";
             ulong sum;
             double k;
@@ -186,6 +187,53 @@ namespace BaseConverter {
             char[] aux = result.ToCharArray();
             Array.Reverse(aux);
             return new string(aux);
+        }
+
+        public static string Hex2Dec(string s) {
+            string result;
+            ulong sum = 0;
+            int k = 0;
+            s = s.ToUpper();
+
+            for (int i = s.Length-1; i >= 0; i--) {
+                if (s[i] == 'A')
+                    sum += (ulong)(10 * Math.Pow(16, k));
+                else if (s[i] == 'B')
+                    sum += (ulong)(11 * Math.Pow(16, k));
+                else if (s[i] == 'C')
+                    sum += (ulong)(12 * Math.Pow(16, k));
+                else if (s[i] == 'D')
+                    sum += (ulong)(13 * Math.Pow(16, k));
+                else if (s[i] == 'E')
+                    sum += (ulong)(14 * Math.Pow(16, k));
+                else if (s[i] == 'F')
+                    sum += (ulong)(15 * Math.Pow(16, k));
+                else
+                    sum += (ulong)(Char.GetNumericValue(s[i])*Math.Pow(10,k));
+                k++;
+            }
+            result = sum.ToString();
+
+            return result;
+        }
+
+        public static string Hex2Bin(string s) {
+            string result;
+            string aux;
+
+            aux = Hex2Dec(s);
+            result = Dec2Bin(aux);
+            return result;
+        }
+
+        public static string Hex2Oct(string s) {
+            string result;
+            string aux;
+
+            aux = Hex2Dec(s);
+            result = Dec2Oct(aux);
+
+            return result;
         }
     }
 }

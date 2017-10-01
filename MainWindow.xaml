@@ -12,7 +12,7 @@
         <ComboBox x:Name="ComboBox1" HorizontalAlignment="Left" Margin="30,71,0,0" VerticalAlignment="Top" Width="120"/>
         <ComboBox x:Name="ComboBox2" HorizontalAlignment="Left" Margin="250,71,0,0" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="SwapButton" Content="Swap" HorizontalAlignment="Left" Margin="170,95,0,0" VerticalAlignment="Top" Width="60" Click="SwapButton_Click"/>
-        <Label x:Name="ProgName" Content="Base Converter" HorizontalAlignment="Left" Margin="150,10,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="ProgName" Content="Base Converter" HorizontalAlignment="Left" Margin="160,10,0,0" VerticalAlignment="Top"/>
         <Button x:Name="ConvertButton" Content="Convert" HorizontalAlignment="Left" Margin="150,210,0,0" VerticalAlignment="Top" Width="100" Click="ConvertButton_Click"/>
         <Label x:Name="ConvertFrom" Content="Convert from:" HorizontalAlignment="Left" Margin="30,45,0,0" VerticalAlignment="Top"/>
         <Label x:Name="ConvertTo" Content="To:" HorizontalAlignment="Left" Margin="250,45,0,0" VerticalAlignment="Top"/>

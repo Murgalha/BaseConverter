@@ -17,9 +17,7 @@ using BaseConverter;
 
 
 namespace BaseConverter {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+
     public partial class MainWindow : Window {
         public MainWindow() {
             InitializeComponent();
@@ -27,6 +25,8 @@ namespace BaseConverter {
             this.ResizeMode = System.Windows.ResizeMode.NoResize;
         }
 
+        /* Initializing ComboBoxes with every
+         * possible convertion option */
         public void InitializeComboBox() {
             ComboBox1.Items.Add("Decimal");
             ComboBox1.Items.Add("Binary");
@@ -40,6 +40,7 @@ namespace BaseConverter {
             ComboBox2.Text = "Decimal";
         }
 
+        /* Swap button swaps the content of ComboBoxes */
         private void SwapButton_Click(object sender, RoutedEventArgs e) {
             Object aux = ComboBox1.SelectedItem;
             ComboBox1.SelectedItem = ComboBox2.SelectedItem;
@@ -50,7 +51,6 @@ namespace BaseConverter {
 
             if(ComboBox1.SelectedItem.ToString() == "Decimal") {
                 ulong n;
-                WarningText.Text = "";
 
                 /* verify the decimal input format and size */
                 try {
@@ -64,6 +64,7 @@ namespace BaseConverter {
                     WarningText.Text = "Error! Type a smaller number.";
                     return;
                 }
+                WarningText.Text = "";
 
                 /* decimal to binary conversion */
                 if(ComboBox2.SelectedItem.ToString() == "Binary") {
@@ -103,6 +104,7 @@ namespace BaseConverter {
                     WarningText.Text = "Error! Invalid number.";
                     return;
                 }
+                WarningText.Text = "";
 
                 /* binary to decimal conversion */
                 if(ComboBox2.SelectedItem.ToString() == "Decimal") {
@@ -113,6 +115,7 @@ namespace BaseConverter {
                     TextBox2.Text = result;
                 }
 
+                /* binary to hexadecimal conversion */
                 else if(ComboBox2.SelectedItem.ToString() == "Hexadecimal") {
                     string result;
 
@@ -121,6 +124,7 @@ namespace BaseConverter {
                     TextBox2.Text = result;
                 }
 
+                /* binary to octal conversion */
                 else if(ComboBox2.SelectedItem.ToString() == "Octal") {
                     string result;
 
@@ -129,6 +133,7 @@ namespace BaseConverter {
                     TextBox2.Text = result;
                 }
 
+                /* no conversion */
                 else {
                     TextBox2.Text = TextBox1.Text;
                 }
@@ -136,16 +141,36 @@ namespace BaseConverter {
 
             else if(ComboBox1.SelectedItem.ToString() == "Hexadecimal") {
 
-                if(ComboBox2.SelectedItem.ToString() == "Binary") {
+                /* check if input is hexadecimal-format */
+                if(!BaseConverter.IsHex(TextBox1.Text.ToString())) {
+                    WarningText.Text = "Error! Invalid number.";
+                    return;
+                }
+                WarningText.Text = "";
 
+                if(ComboBox2.SelectedItem.ToString() == "Binary") {
+                    string result;
+
+                    result = BaseConverter.Hex2Bin(TextBox1.Text.ToString());
+
+                    TextBox2.Text = result;
                 }
 
+                /* hexadecimal to decimal conversion */
                 else if(ComboBox2.SelectedItem.ToString() == "Decimal") {
+                    string result;
 
+                    result = BaseConverter.Hex2Dec(TextBox1.Text.ToString());
+
+                    TextBox2.Text = result;
                 }
 
                 else if(ComboBox2.SelectedItem.ToString() == "Octal") {
+                    string result;
 
+                    result = BaseConverter.Hex2Oct(TextBox1.Text.ToString());
+
+                    TextBox2.Text = result;
                 }
 
                 else {
