@@ -181,15 +181,27 @@ namespace BaseConverter {
             else if(ComboBox1.SelectedItem.ToString() == "Octal") {
 
                 if(ComboBox2.SelectedItem.ToString() == "Binary") {
+                    string result;
 
+                    result = BaseConverter.Oct2Bin(TextBox1.Text.ToString());
+
+                    TextBox2.Text = result;
                 }
 
                 else if(ComboBox2.SelectedItem.ToString() == "Decimal") {
+                    string result;
 
+                    result = BaseConverter.Oct2Dec(TextBox1.Text.ToString());
+
+                    TextBox2.Text = result;
                 }
 
                 else if(ComboBox2.SelectedItem.ToString() == "Hexadecimal") {
+                    string result;
 
+                    result = BaseConverter.Oct2Hex(TextBox1.Text.ToString());
+
+                    TextBox2.Text = result;
                 }
 
                 else {

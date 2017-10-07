@@ -235,5 +235,39 @@ namespace BaseConverter {
 
             return result;
         }
+
+        public static string Oct2Dec(string s) {
+            string result;
+            ulong sum = 0;
+            double k = 0;
+
+            for(int i = s.Length-1; i >= 0; i--) {
+                sum += (ulong)(Char.GetNumericValue(s[i]))*(ulong)(Math.Pow(8, k));
+                k++;
+            }
+            result = sum.ToString();
+
+            return result;
+        }
+
+        public static string Oct2Bin(string s) {
+            string result;
+            string aux;
+
+            aux = Oct2Dec(s);
+            result = Dec2Bin(aux);
+
+            return result;
+        }
+
+        public static string Oct2Hex(string s) {
+            string result;
+            string aux;
+
+            aux = Oct2Dec(s);
+            result = Dec2Hex(aux);
+
+            return result;
+        }
     }
 }
