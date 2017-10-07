@@ -5,30 +5,46 @@ namespace BaseConverter {
 
     public static class BaseConverter {
 
-        public static bool IsBinary(string s) {
-            for (int i = 0; i < s.Length; i++) {
-                if (s[i] != '1' && s[i] != '0') {
-                    return false;
-                }
-            }
-
-            if(s.Length > 64)
-                return false;
-            return true;
+        public static void CheckDecimal(string s) {
+            ulong n;
+            n = Convert.ToUInt64(s);
         }
 
-        public static bool IsHex(string s) {
+        public static void CheckBinary(string s) {
+            if(s.Length > 64)
+                throw new OverflowException("Error! Enter a smaller number");
+
             for (int i = 0; i < s.Length; i++) {
-                if((s[i] >= '0' && s[i] <= '9') || (s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z'))
+                if (s[i] != '1' && s[i] != '0')
+                    throw new FormatException("Error! Invalid number");
+            }
+        }
+
+        public static void CheckHexadecimal(string s) {
+            if(s.Length > 16)
+                throw new OverflowException("Error! Enter a smaller number");
+
+            for (int i = 0; i < s.Length; i++) {
+                if((s[i] >= '0' && s[i] <= '9') || (s[i] >= 'a' && s[i] <= 'f') || (s[i] >= 'A' && s[i] <= 'F'))
                     continue;
                 else
-                    return false;
+                    throw new FormatException("Error! Invalid number");
             }
-            return true;
+        }
+
+        public static void CheckOctal(string s) {
+            if(s.Length > 22)
+                throw new OverflowException("Error! Enter a smaller number");
+
+            for(int i = 0; i < s.Length; i++) {
+                if((s[i] >= '1' && s[i] <= '7') || s[i] == '0')
+                    continue;
+                else
+                    throw new FormatException("Error! Invalid number");
+            }
         }
 
         public static string Dec2Bin(string s) {
-
             string result = "";
             ulong n = Convert.ToUInt64(s);
             List<String> remainders = new List<String>();

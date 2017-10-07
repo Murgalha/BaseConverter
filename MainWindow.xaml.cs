@@ -50,18 +50,17 @@ namespace BaseConverter {
         private void ConvertButton_Click(object sender, RoutedEventArgs e) {
 
             if(ComboBox1.SelectedItem.ToString() == "Decimal") {
-                ulong n;
 
-                /* verify the decimal input format and size */
+                /* check if input is decimal-formatted */
                 try {
-                    n = Convert.ToUInt64(TextBox1.Text.ToString());
+                    BaseConverter.CheckDecimal(TextBox1.Text.ToString());
                 }
                 catch(FormatException) {
                     WarningText.Text = "Error! Invalid number.";
                     return;
                 }
                 catch(OverflowException) {
-                    WarningText.Text = "Error! Type a smaller number.";
+                    WarningText.Text = "Error! Enter a smaller number.";
                     return;
                 }
                 WarningText.Text = "";
@@ -99,11 +98,19 @@ namespace BaseConverter {
 
             else if(ComboBox1.SelectedItem.ToString() == "Binary") {
 
-                /* check if input is binary-format */
-                if (!BaseConverter.IsBinary(TextBox1.Text.ToString())) {
-                    WarningText.Text = "Error! Invalid number.";
+                /* check if input is binary-formatted */
+                try {
+                    BaseConverter.CheckBinary(TextBox1.Text.ToString());
+                }
+                catch(FormatException fe) {
+                    WarningText.Text = fe.Message;
                     return;
                 }
+                catch(OverflowException oe) {
+                    WarningText.Text = oe.Message;
+                    return;
+                }
+
                 WarningText.Text = "";
 
                 /* binary to decimal conversion */
@@ -142,8 +149,15 @@ namespace BaseConverter {
             else if(ComboBox1.SelectedItem.ToString() == "Hexadecimal") {
 
                 /* check if input is hexadecimal-format */
-                if(!BaseConverter.IsHex(TextBox1.Text.ToString())) {
-                    WarningText.Text = "Error! Invalid number.";
+                try {
+                    BaseConverter.CheckHexadecimal(TextBox1.Text.ToString());
+                }
+                catch(FormatException fe) {
+                    WarningText.Text = fe.Message;
+                    return;
+                }
+                catch(OverflowException oe) {
+                    WarningText.Text = oe.Message;
                     return;
                 }
                 WarningText.Text = "";
@@ -174,11 +188,25 @@ namespace BaseConverter {
                 }
 
                 else {
-                    TextBox2.Text = TextBox1.Text;
+                    TextBox2.Text = TextBox1.Text.ToUpper();
                 }
             }
 
             else if(ComboBox1.SelectedItem.ToString() == "Octal") {
+
+                /* check if input is octal-formatted */
+                try {
+                    BaseConverter.CheckOctal(TextBox1.Text.ToString());
+                }
+                catch(FormatException fe) {
+                    WarningText.Text = fe.Message;
+                    return;
+                }
+                catch(OverflowException oe) {
+                    WarningText.Text = oe.Message;
+                    return;
+                }
+                WarningText.Text = "";
 
                 if(ComboBox2.SelectedItem.ToString() == "Binary") {
                     string result;
