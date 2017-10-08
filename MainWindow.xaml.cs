@@ -162,6 +162,7 @@ namespace BaseConverter {
                 }
                 WarningText.Text = "";
 
+                /* hexadecimal to binary conversion */
                 if(ComboBox2.SelectedItem.ToString() == "Binary") {
                     string result;
 
@@ -179,6 +180,7 @@ namespace BaseConverter {
                     TextBox2.Text = result;
                 }
 
+                /* hexadecimal to octal conversion */
                 else if(ComboBox2.SelectedItem.ToString() == "Octal") {
                     string result;
 
@@ -186,7 +188,7 @@ namespace BaseConverter {
 
                     TextBox2.Text = result;
                 }
-
+                /* no conversion */
                 else {
                     TextBox2.Text = TextBox1.Text.ToUpper();
                 }
@@ -208,6 +210,7 @@ namespace BaseConverter {
                 }
                 WarningText.Text = "";
 
+                /* octal to binary conversion */
                 if(ComboBox2.SelectedItem.ToString() == "Binary") {
                     string result;
 
@@ -216,6 +219,7 @@ namespace BaseConverter {
                     TextBox2.Text = result;
                 }
 
+                /* octal to decimal conversion */
                 else if(ComboBox2.SelectedItem.ToString() == "Decimal") {
                     string result;
 
@@ -224,6 +228,7 @@ namespace BaseConverter {
                     TextBox2.Text = result;
                 }
 
+                /* octal to hexadecimal conversion */
                 else if(ComboBox2.SelectedItem.ToString() == "Hexadecimal") {
                     string result;
 
@@ -232,6 +237,7 @@ namespace BaseConverter {
                     TextBox2.Text = result;
                 }
 
+                /* no conversion */
                 else {
                     TextBox2.Text = TextBox1.Text;
                 }
